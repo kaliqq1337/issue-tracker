@@ -13,7 +13,7 @@ A full-stack issue tracking application built with a modern Service-Oriented Arc
 - **Maven** for dependency management
 
 ### Frontend
-- **Angular 19** (v21.1.x)
+- **Angular 20** (v21.1.x)
 - **Tailwind CSS** for styling
 - **@stomp/stompjs** & **sockjs-client** for real-time communication
 - **Reactive Signals** for state management
