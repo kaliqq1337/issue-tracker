@@ -1,0 +1,363 @@
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+15:19:08.706 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.issue_tracker.issue_tracker_backend.integration.IssueIntegrationTest]: IssueIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+15:19:08.811 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.issue_tracker.issue_tracker_backend.IssueTrackerBackendApplication for test class com.issue_tracker.issue_tracker_backend.integration.IssueIntegrationTest
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.4.2)
+2026-02-10T15:19:09.202-05:00  INFO 31448 --- [issue-tracker-backend] [           main] c.i.i.integration.IssueIntegrationTest   : Starting IssueIntegrationTest using Java 17.0.12 with PID 31448 (started by littl in C:\Users\littl\Desktop\issue-tracker-mono\issue-tracker-backend)
+2026-02-10T15:19:09.203-05:00  INFO 31448 --- [issue-tracker-backend] [           main] c.i.i.integration.IssueIntegrationTest   : No active profile set, falling back to 1 default profile: "default"
+2026-02-10T15:19:09.213-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@6b63e6ad
+2026-02-10T15:19:09.749-05:00  INFO 31448 --- [issue-tracker-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-10T15:19:09.808-05:00  INFO 31448 --- [issue-tracker-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 5 JPA repository interfaces.
+2026-02-10T15:19:10.257-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-10T15:19:10.339-05:00  INFO 31448 --- [issue-tracker-backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2026-02-10T15:19:10.379-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-10T15:19:10.480-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-10T15:19:10.501-05:00  INFO 31448 --- [issue-tracker-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-10T15:19:10.606-05:00  INFO 31448 --- [issue-tracker-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-02-10T15:19:10.608-05:00  INFO 31448 --- [issue-tracker-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-10T15:19:10.647-05:00  INFO 31448 --- [issue-tracker-backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+        Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+        Database driver: undefined/unknown
+        Database version: 2.3.232
+        Autocommit mode: undefined/unknown
+        Isolation level: undefined/unknown
+        Minimum pool size: undefined/unknown
+        Maximum pool size: undefined/unknown
+2026-02-10T15:19:11.159-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists activities cascade
+Hibernate: drop table if exists comments cascade
+Hibernate: drop table if exists issue_assignees cascade
+Hibernate: drop table if exists issue_tags cascade
+Hibernate: drop table if exists issues cascade
+Hibernate: drop table if exists projects cascade
+Hibernate: drop table if exists users cascade
+Hibernate: create table activities (created_at timestamp(6), action varchar(255), details varchar(255), id varchar(255) not null, issue_id varchar(255), user_id varchar(255), primary key (id))
+Hibernate: create table comments (created_at timestamp(6), id varchar(255) not null, issue_id varchar(255), text varchar(255), user_id varchar(255), primary key (id))
+Hibernate: create table issue_assignees (issue_id varchar(255) not null, user_id varchar(255) not null)
+Hibernate: create table issue_tags (issue_id varchar(255) not null, tags varchar(255))
+Hibernate: create table issues (created_at timestamp(6), updated_at timestamp(6), description varchar(255), id varchar(255) not null, project_id varchar(255), title varchar(255), priority enum ('HIGH','LOW','MEDIUM'), status enum ('DONE','IN_PROGRESS','OPEN'), primary key (id))
+Hibernate: create table projects (created_at timestamp(6), updated_at timestamp(6), description varchar(255), id varchar(255) not null, name varchar(255), user_id varchar(255), primary key (id))
+Hibernate: create table users (email varchar(255), id varchar(255) not null, name varchar(255), primary key (id))
+Hibernate: alter table if exists comments add constraint FK287j1dpionjmfs2yycfjmy5j2 foreign key (issue_id) references issues
+Hibernate: alter table if exists issue_assignees add constraint FKfb92txrpb8l0fdh2iswmtmmrj foreign key (user_id) references users
+Hibernate: alter table if exists issue_assignees add constraint FK81q8jhewj6k8k5s1y4cw1wdyo foreign key (issue_id) references issues
+Hibernate: alter table if exists issue_tags add constraint FK57ildehmbrelpv8j1l76jaqto foreign key (issue_id) references issues
+Hibernate: alter table if exists issues add constraint FK4j2x3reshuu7qj5svh6eacnpt foreign key (project_id) references projects
+Hibernate: alter table if exists projects add constraint FKhswfwa3ga88vxv1pmboss6jhm foreign key (user_id) references users
+2026-02-10T15:19:11.195-05:00  INFO 31448 --- [issue-tracker-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-10T15:19:11.697-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+2026-02-10T15:19:11.944-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.web.client.RestTemplate              : HTTP GET https://dev-14b8z1k6lim1jxbo.us.auth0.com/.well-known/openid-configuration
+2026-02-10T15:19:11.958-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2026-02-10T15:19:12.431-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2026-02-10T15:19:12.432-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.web.client.RestTemplate              : Reading to [java.util.Map<java.lang.String, java.lang.Object>]
+2026-02-10T15:19:12.507-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        c.i.i.c.ActivityController:
+
+2026-02-10T15:19:12.507-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        c.i.i.c.AuthController:
+
+2026-02-10T15:19:12.508-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        c.i.i.c.CommentController:
+
+2026-02-10T15:19:12.508-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        c.i.i.c.IssueController:
+
+2026-02-10T15:19:12.508-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        c.i.i.c.ProjectController:
+
+2026-02-10T15:19:12.511-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        o.s.b.a.w.s.e.BasicErrorController:
+
+2026-02-10T15:19:12.650-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2026-02-10T15:19:12.704-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-02-10T15:19:12.908-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.a.catalina.core.AprLifecycleListener   : The Apache Tomcat Native library could not be found using names [tcnative-2, libtcnative-2, tcnative-1, libtcnative-1] on the java.library.path [C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\littl\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Nmap;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Users\littl\.dotnet\tools;C:\Program Files\JetBrains\GoLand 2025.3\bin;C:\Users\littl\go\bin;C:\Users\littl\AppData\Roaming\npm;.]. The errors reported were [Can't load library: C:\Users\littl\Desktop\issue-tracker-mono\issue-tracker-backend\bin\tcnative-2.dll, Can't load library: C:\Users\littl\Desktop\issue-tracker-mono\issue-tracker-backend\bin\libtcnative-2.dll, Can't load library: C:\Users\littl\Desktop\issue-tracker-mono\issue-tracker-backend\bin\tcnative-1.dll, Can't load library: C:\Users\littl\Desktop\issue-tracker-mono\issue-tracker-backend\bin\libtcnative-1.dll, no tcnative-2 in java.library.path: C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\littl\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Nmap;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Users\littl\.dotnet\tools;C:\Program Files\JetBrains\GoLand 2025.3\bin;C:\Users\littl\go\bin;C:\Users\littl\AppData\Roaming\npm;., no libtcnative-2 in java.library.path: C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\littl\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Nmap;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Users\littl\.dotnet\tools;C:\Program Files\JetBrains\GoLand 2025.3\bin;C:\Users\littl\go\bin;C:\Users\littl\AppData\Roaming\npm;., no tcnative-1 in java.library.path: C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\littl\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Nmap;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Users\littl\.dotnet\tools;C:\Program Files\JetBrains\GoLand 2025.3\bin;C:\Users\littl\go\bin;C:\Users\littl\AppData\Roaming\npm;., no libtcnative-1 in java.library.path: C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\littl\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Nmap;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Users\littl\.dotnet\tools;C:\Program Files\JetBrains\GoLand 2025.3\bin;C:\Users\littl\go\bin;C:\Users\littl\AppData\Roaming\npm;.]
+org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: C:\Users\littl\Desktop\issue-tracker-mono\issue-tracker-backend\bin\tcnative-2.dll, Can't load library: C:\Users\littl\Desktop\issue-tracker-mono\issue-tracker-backend\bin\libtcnative-2.dll, Can't load library: C:\Users\littl\Desktop\issue-tracker-mono\issue-tracker-backend\bin\tcnative-1.dll, Can't load library: C:\Users\littl\Desktop\issue-tracker-mono\issue-tracker-backend\bin\libtcnative-1.dll, no tcnative-2 in java.library.path: C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\littl\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Nmap;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Users\littl\.dotnet\tools;C:\Program Files\JetBrains\GoLand 2025.3\bin;C:\Users\littl\go\bin;C:\Users\littl\AppData\Roaming\npm;., no libtcnative-2 in java.library.path: C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\littl\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Nmap;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Users\littl\.dotnet\tools;C:\Program Files\JetBrains\GoLand 2025.3\bin;C:\Users\littl\go\bin;C:\Users\littl\AppData\Roaming\npm;., no tcnative-1 in java.library.path: C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\littl\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Nmap;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Users\littl\.dotnet\tools;C:\Program Files\JetBrains\GoLand 2025.3\bin;C:\Users\littl\go\bin;C:\Users\littl\AppData\Roaming\npm;., no libtcnative-1 in java.library.path: C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\littl\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Nmap;C:\Program Files\aircrack-ng-1.7-win\bin;C:\Users\littl\.dotnet\tools;C:\Program Files\JetBrains\GoLand 2025.3\bin;C:\Users\littl\go\bin;C:\Users\littl\AppData\Roaming\npm;.
+        at org.apache.tomcat.jni.Library.<init>(Library.java:91) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+        at org.apache.tomcat.jni.Library.initialize(Library.java:147) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+        at org.apache.catalina.core.AprLifecycleListener.init(AprLifecycleListener.java:211) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+        at org.apache.catalina.core.AprLifecycleListener.isAprAvailable(AprLifecycleListener.java:113) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+        at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getDefaultServerLifecycleListeners(TomcatServletWebServerFactory.java:191) ~[spring-boot-3.4.2.jar:3.4.2]
+        at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.<init>(TomcatServletWebServerFactory.java:138) ~[spring-boot-3.4.2.jar:3.4.2]
+        at org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryConfiguration$EmbeddedTomcat.tomcatServletWebServerFactory(ServletWebServerFactoryConfiguration.java:73) ~[spring-boot-autoconfigure-3.4.2.jar:3.4.2]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+        at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:171) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:88) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:168) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1361) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1191) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:563) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:307) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1122) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1093) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1030) ~[spring-beans-6.2.2.jar:6.2.2]
+        at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987) ~[spring-context-6.2.2.jar:6.2.2]
+        at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.2.jar:6.2.2]
+        at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.4.2.jar:3.4.2]
+        at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.4.2.jar:3.4.2]
+        at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.4.2.jar:3.4.2]
+        at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$3(SpringBootContextLoader.java:137) ~[spring-boot-test-3.4.2.jar:3.4.2]
+        at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58) ~[spring-core-6.2.2.jar:6.2.2]
+        at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46) ~[spring-core-6.2.2.jar:6.2.2]
+        at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1461) ~[spring-boot-3.4.2.jar:3.4.2]
+        at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:553) ~[spring-boot-test-3.4.2.jar:3.4.2]
+        at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:137) ~[spring-boot-test-3.4.2.jar:3.4.2]
+        at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:108) ~[spring-boot-test-3.4.2.jar:3.4.2]
+        at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:225) ~[spring-test-6.2.2.jar:6.2.2]
+        at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:152) ~[spring-test-6.2.2.jar:6.2.2]
+        at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130) ~[spring-test-6.2.2.jar:6.2.2]
+        at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:191) ~[spring-test-6.2.2.jar:6.2.2]
+        at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:130) ~[spring-test-6.2.2.jar:6.2.2]
+        at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260) ~[spring-test-6.2.2.jar:6.2.2]
+        at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:160) ~[spring-test-6.2.2.jar:6.2.2]
+        at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$11(ClassBasedTestDescriptor.java:378) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:383) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$12(ClassBasedTestDescriptor.java:378) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183) ~[na:na]
+        at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+        at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[na:na]
+        at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+        at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625) ~[na:na]
+        at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
+        at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+        at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150) ~[na:na]
+        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173) ~[na:na]
+        at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+        at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[na:na]
+        at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:377) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$7(ClassBasedTestDescriptor.java:290) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:289) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:279) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at java.base/java.util.Optional.orElseGet(Optional.java:364) ~[na:na]
+        at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$6(ClassBasedTestDescriptor.java:278) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$1(TestMethodTestDescriptor.java:105) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:104) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:68) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:128) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:128) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
+        at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
+        at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) ~[surefire-booter-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) ~[surefire-booter-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) ~[surefire-booter-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) ~[surefire-booter-3.5.2.jar:3.5.2]
+2026-02-10T15:19:13.067-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-02-10T15:19:13.107-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-02-10T15:19:13.145-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-02-10T15:19:13.223-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-10T15:19:13.223-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-10T15:19:13.225-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-02-10T15:19:13.265-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-02-10T15:19:13.265-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-02-10T15:19:13.267-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2026-02-10T15:19:13.267-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@142dbf1a]
+2026-02-10T15:19:13.267-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@142dbf1a]
+2026-02-10T15:19:13.268-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@142dbf1a]]
+2026-02-10T15:19:13.269-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2026-02-10T15:19:13.271-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-10T15:19:13.272-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-10T15:19:13.283-05:00  INFO 31448 --- [issue-tracker-backend] [           main] c.i.i.integration.IssueIntegrationTest   : Started IssueIntegrationTest in 4.278 seconds (process running for 6.055)
+2026-02-10T15:19:13.375-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.issue_tracker.issue_tracker_backend.controller.IssueController#getIssue(String)
+Hibernate: select i1_0.id,i1_0.created_at,i1_0.description,i1_0.priority,i1_0.project_id,i1_0.status,i1_0.title,i1_0.updated_at from issues i1_0 where i1_0.id=?
+2026-02-10T15:19:13.459-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-02-10T15:19:13.459-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Nothing to write: null body
+2026-02-10T15:19:13.473-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.issue_tracker.issue_tracker_backend.controller.IssueController#getIssues(String, int, int)
+Hibernate: select i1_0.id,i1_0.created_at,i1_0.description,i1_0.priority,i1_0.project_id,i1_0.status,i1_0.title,i1_0.updated_at from issues i1_0 offset ? rows fetch first ? rows only
+Hibernate: select count(i1_0.id) from issues i1_0
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+2026-02-10T15:19:13.561-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+2026-02-10T15:19:13.570-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] m.m.a.RequestResponseBodyMethodProcessor : Writing [PaginatedResponseDto(data=[IssueDto(id=i1, projectId=p1, title=Bug in login, description=Users canno (truncated)...]
+2026-02-10T15:19:13.617-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.issue_tracker.issue_tracker_backend.controller.IssueController#getIssues(String, int, int)
+Hibernate: select i1_0.id,i1_0.created_at,i1_0.description,i1_0.priority,i1_0.project_id,i1_0.status,i1_0.title,i1_0.updated_at from issues i1_0 left join projects p1_0 on p1_0.id=i1_0.project_id where p1_0.id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+2026-02-10T15:19:13.635-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+2026-02-10T15:19:13.636-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] m.m.a.RequestResponseBodyMethodProcessor : Writing [PaginatedResponseDto(data=[IssueDto(id=i1, projectId=p1, title=Bug in login, description=Users canno (truncated)...]
+2026-02-10T15:19:13.645-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.issue_tracker.issue_tracker_backend.controller.IssueController#getIssue(String)
+Hibernate: select i1_0.id,i1_0.created_at,i1_0.description,i1_0.priority,i1_0.project_id,i1_0.status,i1_0.title,i1_0.updated_at from issues i1_0 where i1_0.id=?
+Hibernate: select a1_0.issue_id,a1_1.id,a1_1.email,a1_1.name from issue_assignees a1_0 join users a1_1 on a1_1.id=a1_0.user_id where a1_0.issue_id=?
+2026-02-10T15:19:13.648-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+Hibernate: select t1_0.issue_id,t1_0.tags from issue_tags t1_0 where t1_0.issue_id=?
+2026-02-10T15:19:13.649-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [IssueDto(id=i1, projectId=p1, title=Bug in login, description=Users cannot login with special charac (truncated)...]
+2026-02-10T15:19:13.659-05:00  INFO 31448 --- [issue-tracker-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.issue_tracker.issue_tracker_backend.integration.ProjectIntegrationTest]: ProjectIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-10T15:19:13.665-05:00  INFO 31448 --- [issue-tracker-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.issue_tracker.issue_tracker_backend.IssueTrackerBackendApplication for test class com.issue_tracker.issue_tracker_backend.integration.ProjectIntegrationTest
+2026-02-10T15:19:13.674-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.issue_tracker.issue_tracker_backend.controller.ProjectController#getProject(String)
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at,p1_0.user_id from projects p1_0 where p1_0.id=?
+2026-02-10T15:19:13.678-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-02-10T15:19:13.678-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Nothing to write: null body
+2026-02-10T15:19:13.683-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.issue_tracker.issue_tracker_backend.controller.ProjectController#getProjects(int, int)
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at,p1_0.user_id from projects p1_0 offset ? rows fetch first ? rows only
+Hibernate: select count(p1_0.id) from projects p1_0
+2026-02-10T15:19:13.689-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-02-10T15:19:13.689-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] m.m.a.RequestResponseBodyMethodProcessor : Writing [PaginatedResponseDto(data=[ProjectDto(id=p1, name=Project Alpha, description=This is the first sampl (truncated)...]
+2026-02-10T15:19:13.697-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.issue_tracker.issue_tracker_backend.controller.ProjectController#createProject(ProjectDto)
+2026-02-10T15:19:13.714-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [ProjectDto(id=new-p, name=Integration Test Project, description=Created during integration test, use (truncated)...]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at,p1_0.user_id,i1_0.project_id,i1_0.id,i1_0.created_at,i1_0.description,i1_0.priority,i1_0.status,i1_0.title,i1_0.updated_at from projects p1_0 left join issues i1_0 on p1_0.id=i1_0.project_id where p1_0.id=?
+2026-02-10T15:19:13.730-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-02-10T15:19:13.730-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] m.m.a.RequestResponseBodyMethodProcessor : Writing [ProjectDto(id=new-p, name=Integration Test Project, description=Created during integration test, use (truncated)...]
+2026-02-10T15:19:13.738-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.issue_tracker.issue_tracker_backend.controller.ProjectController#getProject(String)
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at,p1_0.user_id from projects p1_0 where p1_0.id=?
+2026-02-10T15:19:13.739-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-02-10T15:19:13.739-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ProjectDto(id=p1, name=Project Alpha, description=This is the first sample project., userId=u1, crea (truncated)...]
+2026-02-10T15:19:13.744-05:00  INFO 31448 --- [issue-tracker-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.issue_tracker.issue_tracker_backend.IssueTrackerBackendApplicationTests]: IssueTrackerBackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-10T15:19:13.750-05:00  INFO 31448 --- [issue-tracker-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.issue_tracker.issue_tracker_backend.IssueTrackerBackendApplication for test class com.issue_tracker.issue_tracker_backend.IssueTrackerBackendApplicationTests
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.4.2)
+2026-02-10T15:19:13.765-05:00  INFO 31448 --- [issue-tracker-backend] [           main] .i.i.IssueTrackerBackendApplicationTests : Starting IssueTrackerBackendApplicationTests using Java 17.0.12 with PID 31448 (started by littl in C:\Users\littl\Desktop\issue-tracker-mono\issue-tracker-backend)
+2026-02-10T15:19:13.765-05:00  INFO 31448 --- [issue-tracker-backend] [           main] .i.i.IssueTrackerBackendApplicationTests : No active profile set, falling back to 1 default profile: "default"
+2026-02-10T15:19:13.766-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@36f8abe2
+2026-02-10T15:19:13.863-05:00  INFO 31448 --- [issue-tracker-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-10T15:19:13.875-05:00  INFO 31448 --- [issue-tracker-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 5 JPA repository interfaces.
+2026-02-10T15:19:13.929-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-10T15:19:13.931-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-10T15:19:13.940-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-10T15:19:13.941-05:00  INFO 31448 --- [issue-tracker-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-02-10T15:19:13.942-05:00  INFO 31448 --- [issue-tracker-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
+2026-02-10T15:19:13.942-05:00  INFO 31448 --- [issue-tracker-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-02-10T15:19:13.943-05:00  INFO 31448 --- [issue-tracker-backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+        Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+        Database driver: undefined/unknown
+        Database version: 2.3.232
+        Autocommit mode: undefined/unknown
+        Isolation level: undefined/unknown
+        Minimum pool size: undefined/unknown
+        Maximum pool size: undefined/unknown
+2026-02-10T15:19:14.013-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists activities cascade
+Hibernate: drop table if exists comments cascade
+Hibernate: drop table if exists issue_assignees cascade
+Hibernate: drop table if exists issue_tags cascade
+Hibernate: drop table if exists issues cascade
+Hibernate: drop table if exists projects cascade
+Hibernate: drop table if exists users cascade
+Hibernate: create table activities (created_at timestamp(6), action varchar(255), details varchar(255), id varchar(255) not null, issue_id varchar(255), user_id varchar(255), primary key (id))
+Hibernate: create table comments (created_at timestamp(6), id varchar(255) not null, issue_id varchar(255), text varchar(255), user_id varchar(255), primary key (id))
+Hibernate: create table issue_assignees (issue_id varchar(255) not null, user_id varchar(255) not null)
+Hibernate: create table issue_tags (issue_id varchar(255) not null, tags varchar(255))
+Hibernate: create table issues (created_at timestamp(6), updated_at timestamp(6), description varchar(255), id varchar(255) not null, project_id varchar(255), title varchar(255), priority enum ('HIGH','LOW','MEDIUM'), status enum ('DONE','IN_PROGRESS','OPEN'), primary key (id))
+Hibernate: create table projects (created_at timestamp(6), updated_at timestamp(6), description varchar(255), id varchar(255) not null, name varchar(255), user_id varchar(255), primary key (id))
+Hibernate: create table users (email varchar(255), id varchar(255) not null, name varchar(255), primary key (id))
+Hibernate: alter table if exists comments add constraint FK287j1dpionjmfs2yycfjmy5j2 foreign key (issue_id) references issues
+Hibernate: alter table if exists issue_assignees add constraint FKfb92txrpb8l0fdh2iswmtmmrj foreign key (user_id) references users
+Hibernate: alter table if exists issue_assignees add constraint FK81q8jhewj6k8k5s1y4cw1wdyo foreign key (issue_id) references issues
+Hibernate: alter table if exists issue_tags add constraint FK57ildehmbrelpv8j1l76jaqto foreign key (issue_id) references issues
+Hibernate: alter table if exists issues add constraint FK4j2x3reshuu7qj5svh6eacnpt foreign key (project_id) references projects
+Hibernate: alter table if exists projects add constraint FKhswfwa3ga88vxv1pmboss6jhm foreign key (user_id) references users
+2026-02-10T15:19:14.021-05:00  INFO 31448 --- [issue-tracker-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-10T15:19:14.081-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+2026-02-10T15:19:14.093-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.web.client.RestTemplate              : HTTP GET https://dev-14b8z1k6lim1jxbo.us.auth0.com/.well-known/openid-configuration
+2026-02-10T15:19:14.093-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.web.client.RestTemplate              : Accept=[application/json, application/*+json]
+2026-02-10T15:19:14.158-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.web.client.RestTemplate              : Response 200 OK
+2026-02-10T15:19:14.159-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.web.client.RestTemplate              : Reading to [java.util.Map<java.lang.String, java.lang.Object>]
+2026-02-10T15:19:14.168-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        c.i.i.c.ActivityController:
+
+2026-02-10T15:19:14.168-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        c.i.i.c.AuthController:
+
+2026-02-10T15:19:14.168-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        c.i.i.c.CommentController:
+
+2026-02-10T15:19:14.168-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        c.i.i.c.IssueController:
+
+2026-02-10T15:19:14.168-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        c.i.i.c.ProjectController:
+
+2026-02-10T15:19:14.168-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .WebSocketAnnotationMethodMessageHandler :
+        o.s.b.a.w.s.e.BasicErrorController:
+
+2026-02-10T15:19:14.188-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2026-02-10T15:19:14.197-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2026-02-10T15:19:14.228-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-02-10T15:19:14.231-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-02-10T15:19:14.238-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-02-10T15:19:14.263-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-02-10T15:19:14.263-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-02-10T15:19:14.263-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2026-02-10T15:19:14.263-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@47d32e33]
+2026-02-10T15:19:14.263-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@47d32e33]
+2026-02-10T15:19:14.263-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@47d32e33]]
+2026-02-10T15:19:14.263-05:00  INFO 31448 --- [issue-tracker-backend] [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2026-02-10T15:19:14.263-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-10T15:19:14.263-05:00 DEBUG 31448 --- [issue-tracker-backend] [           main] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-10T15:19:14.266-05:00  INFO 31448 --- [issue-tracker-backend] [           main] .i.i.IssueTrackerBackendApplicationTests : Started IssueTrackerBackendApplicationTests in 0.513 seconds (process running for 7.038)
+Hibernate: select count(*) from projects p1_0
