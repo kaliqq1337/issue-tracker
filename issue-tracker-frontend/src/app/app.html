@@ -1,0 +1,63 @@
+<div class="min-h-screen flex flex-col bg-gray-50">
+  @if (authService.isLoggedIn()) {
+    <header class="sticky top-0 z-50 shadow-sm">
+      <mat-toolbar color="primary" class="!h-16 md:!h-20">
+        <!-- Use full-width layout so the Logout button can sit at the far right edge -->
+        <div class="w-full px-4 flex items-center">
+          <!-- Brand & Nav (left) -->
+          <div class="flex items-center gap-4 md:gap-8">
+            <div class="flex items-center gap-2 cursor-pointer" routerLink="/">
+              <span class="text-xl md:text-2xl font-extrabold tracking-tight text-white">
+                Issue<span class="text-primary-100 opacity-90 font-light">Tracker</span>
+              </span>
+            </div>
+
+            <!-- Navigation Desktop -->
+            <nav class="hidden md:flex items-center gap-1">
+              <a
+                mat-button
+                routerLink="/projects"
+                routerLinkActive="bg-white/10"
+                [routerLinkActiveOptions]="{ exact: false }"
+                class="!px-4 !py-2 !rounded-lg transition-colors"
+              >
+                <span class="font-medium">Projects</span>
+              </a>
+              <a
+                mat-button
+                routerLink="/issues"
+                routerLinkActive="bg-white/10"
+                [routerLinkActiveOptions]="{ exact: false }"
+                class="!px-4 !py-2 !rounded-lg transition-colors"
+              >
+                <span class="font-medium">Issues</span>
+              </a>
+            </nav>
+          </div>
+
+          <!-- Right Side: User & Actions (push all the way to the right) -->
+          <div class="ml-auto flex items-center gap-3 md:gap-6">
+            @if (authService.currentUser()) {
+              <span class="text-white text-sm hidden sm:inline">{{ authService.currentUser()?.name }}</span>
+            }
+            <button mat-button (click)="authService.logout()" class="text-white border border-white/30 rounded-lg">
+              Logout
+            </button>
+          </div>
+        </div>
+      </mat-toolbar>
+    </header>
+  }
+
+  <!-- Main Content -->
+  <main class="flex-grow">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200 py-6 px-4">
+    <div class="container mx-auto text-center text-gray-400 text-sm">
+      &copy; 2026 Issue Tracker System. All rights reserved.
+    </div>
+  </footer>
+</div>

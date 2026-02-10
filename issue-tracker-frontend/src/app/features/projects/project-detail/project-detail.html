@@ -1,0 +1,32 @@
+<div class="project-detail-container">
+  @if (project()) {
+    <div class="project-detail">
+      <div class="header">
+        <h2>{{ project()?.name }}</h2>
+        <a routerLink="/projects" class="back-link">&larr; Back to Projects</a>
+      </div>
+
+      <div class="content">
+        <div class="description-section">
+          <h3>Description</h3>
+          <p>{{ project()?.description }}</p>
+        </div>
+
+        <div class="metadata">
+          <p><strong>Created:</strong> {{ project()?.createdAt | date }}</p>
+          <p><strong>Updated:</strong> {{ project()?.updatedAt | date }}</p>
+        </div>
+
+        <div class="actions">
+          <a [routerLink]="['/issues']" [queryParams]="{ projectId: project()?.id }" class="btn btn-primary">
+            View Issues
+          </a>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="loading-state">
+      <p>Loading project...</p>
+    </div>
+  }
+</div>

@@ -1,0 +1,73 @@
+@if (issue()) {
+  <div class="issue-detail">
+    <div class="header">
+      <h2>{{ issue()?.title }}</h2>
+      <button (click)="toggleEdit()">{{ isEditing() ? 'Cancel' : 'Edit' }}</button>
+    </div>
+
+    @if (isEditing()) {
+      <form (submit)="saveIssue()">
+        <div>
+          <label>Title</label>
+          <input [(ngModel)]="editForm.title" name="title" required />
+        </div>
+        <div>
+          <label>Description</label>
+          <textarea [(ngModel)]="editForm.description" name="description"></textarea>
+        </div>
+        <div>
+          <label>Status</label>
+          <select [(ngModel)]="editForm.status" name="status">
+            <option value="OPEN">Open</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="DONE">Done</option>
+          </select>
+        </div>
+        <div>
+          <label>Priority</label>
+          <select [(ngModel)]="editForm.priority" name="priority">
+            <option value="LOW">Low</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
+          </select>
+        </div>
+        <button type="submit">Save</button>
+      </form>
+    } @else {
+      <p>{{ issue()?.description }}</p>
+      <div class="metadata">
+        <span>Status: {{ issue()?.status }}</span> |
+        <span>Priority: {{ issue()?.priority }}</span> |
+        <span>Tags: {{ issue()?.tags?.join(', ') }}</span>
+      </div>
+    }
+
+    <div class="comments-section">
+      <h3>Comments</h3>
+      @for (comment of comments(); track comment.id) {
+        <div class="comment">
+          <p>{{ comment.text }}</p>
+          <small>{{ comment.createdAt | date : 'short' }}</small>
+        </div>
+      }
+      <div class="add-comment">
+        <textarea [(ngModel)]="newCommentText" placeholder="Add a comment..."></textarea>
+        <button (click)="addComment()">Post Comment</button>
+      </div>
+    </div>
+
+    <div class="activity-log">
+      <h3>Activity Log</h3>
+      <ul>
+        @for (activity of activityLog(); track activity.id) {
+          <li>
+            {{ activity.action }}: {{ activity.details }}
+            <small>{{ activity.createdAt | date : 'short' }}</small>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+} @else {
+  <p>Loading issue...</p>
+}
