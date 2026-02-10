@@ -75,6 +75,7 @@ If given 2 more days, the following high-impact improvements would be prioritize
 - **PostgreSQL Integration**: Replace H2 with a persistent PostgreSQL instance. This involves updating `application.properties` and adding a `docker-compose.yml` for the database.
 - **Production-Ready Dockerization**: Re-implement Docker multi-stage builds for both services, ensuring Nginx is properly configured as a reverse proxy for both static assets and API/WS traffic.
 - **Environment Configuration**: Implement a more robust `application.yml` with profiles (dev, prod) and secure secret management (injecting Auth0 keys via environment variables).
+- **Secrets**:  Remove hardcoded Auth0 keys from `application.properties`.
 
 ### Day 2: Features & Quality
 - **Soft Deletes & Auditing**: Implement `@CreatedBy` and `@LastModifiedBy` auditing using Spring Data JPA. Add soft-delete functionality for issues and projects.
