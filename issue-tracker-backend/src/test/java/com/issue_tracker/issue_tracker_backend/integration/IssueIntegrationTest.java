@@ -25,24 +25,26 @@ public class IssueIntegrationTest {
 
     @Test
     void shouldGetAllIssuesWithPagination() throws Exception {
-        // data.sql seeds 25 issues
+        // data.sql seeds 225 issues after adding 10 per project
         mockMvc.perform(get("/api/issues")
                         .param("page", "1")
                         .param("pageSize", "10"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data", hasSize(10)))
-                .andExpect(jsonPath("$.total", is(25)))
+                .andExpect(jsonPath("$.total", is(225)))
                 .andExpect(jsonPath("$.page", is(1)))
                 .andExpect(jsonPath("$.pageSize", is(10)));
     }
 
     @Test
     void shouldGetIssuesFilteredByProject() throws Exception {
-        // Project p1 has 2 issues: i1, i2
+        // Project p1 has 12 issues after seeding +10 per project
         mockMvc.perform(get("/api/issues")
-                        .param("projectId", "p1"))
+                        .param("projectId", "p1")
+                        .param("page", "1")
+                        .param("pageSize", "20"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data", hasSize(2)))
+                .andExpect(jsonPath("$.data", hasSize(12)))
                 .andExpect(jsonPath("$.data[0].projectId", is("p1")))
                 .andExpect(jsonPath("$.data[1].projectId", is("p1")));
     }
