@@ -45,6 +45,17 @@ npm start
 - The application will be accessible at `http://localhost:4200`
 - The `npm start` command uses `proxy.conf.json` to route API and WebSocket calls to the backend.
 
+### 3. Run with Docker (Recommended)
+To run the entire stack (Backend + Frontend) using Docker:
+
+```bash
+docker-compose up --build
+```
+
+- **Frontend**: `http://localhost` (Port 80)
+- **Backend API**: `http://localhost:8080`
+- **H2 Console**: `http://localhost:8080/h2-console`
+
 ---
 
 ## ⚖️ Architectural Trade-offs
